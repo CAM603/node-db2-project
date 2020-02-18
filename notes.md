@@ -31,4 +31,43 @@ module.exports = {
 }
 /////////////////////////////////
 - Add api folder
-- Add index.js
+- Add index.js in root of directory
+- Add server.js inside api folder
+
+## In index.js add: 
+const server = require('./server.js');
+
+const PORT = process.env.PORT || 4000;
+
+server.listen(PORT, () => {
+    console.log(`Lisitening on port ${PORT}...`)
+})
+
+## In server.js add:
+const express = require('express');
+
+const server = express();
+
+server.use(express.json());
+
+server.get('/', (req, res) => {
+    res.send('<h1>Hello from Node db2 Project</h1>')
+});
+
+module.exports = server;
+
+- Add cars folder
+- Add cars-router.js file inside cars folder
+
+## In cars-router add:
+const express = require('express');
+
+const router = express.Router();
+
+//////// Requests will go here ////////////
+
+module.exports = router;
+
+## In server.js add:
+const carsRouter = require('../cars/cars-router');
+server.use('/api/cars', carsRouter);
