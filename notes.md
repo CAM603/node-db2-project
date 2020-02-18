@@ -1,9 +1,9 @@
 ## Install Dependencies
-- npm i
-- npm install knex sqlite3
-- npm install express
-- npm install -g knex
-- knex init
+- `npm i`
+- `npm install knex sqlite3`
+- `npm install express`
+- `npm install -g knex`
+- `knex init`
 
 ## Add folders
 - Add data folder
@@ -85,8 +85,17 @@ module.exports = knex(configOptions);
 const db = require('../data/dbConfig');
 
 ## Create a migration
-- knex migrate:make create_cars_table
+- `knex migrate:make create_cars_table`
 
 ## In new migration file
 - Create table
-- Add migration functions: knex migrate:latest
+- Add migration functions: `knex migrate:latest`
+
+## Add seeds
+- `knex seed:make 001-cars`
+
+## In 001-cars.js
+- Change all `table_name` to `cars`
+- Change delete() to truncate()
+- Add data
+- Seed data: `knex seed:run`
