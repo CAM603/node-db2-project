@@ -71,3 +71,22 @@ module.exports = router;
 ## In server.js add:
 const carsRouter = require('../cars/cars-router');
 server.use('/api/cars', carsRouter);
+
+- Add dbConfig.js in data folder
+
+## In dbConfig.js add:
+const knex = require('knex');
+
+const configOptions = require('../knexfile').development;
+
+module.exports = knex(configOptions);
+
+## In cars-router.js add:
+const db = require('../data/dbConfig');
+
+## Create a migration
+- knex migrate:make create_cars_table
+
+## In new migration file
+- Create table
+- Add migration functions: knex migrate:latest
