@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
         .then(ids => {
             db('cars')
                 .where({id: ids[0]})
+                .first()
                 .then(car => {
                     res.status(200).json(car)
                 })
@@ -44,6 +45,24 @@ router.post('/', (req, res) => {
         .catch(err => {
             console.log(err)
             res.status(500).json({ error: 'Failed to add car' })
+        })
+})
+
+router.put('/:id', (req, res) => {
+    db('cars')
+        .where({id: req.params.id})
+        .update(req.body)
+        .then(count => {
+            db('cars')
+            .where({id: req.params.id})
+            .first()
+            .then(car => {
+                res.status(200).json(car)
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ error: 'Failed to update car' })
         })
 })
 
